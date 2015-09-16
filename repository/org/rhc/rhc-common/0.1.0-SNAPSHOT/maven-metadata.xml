@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>org.rhc</groupId>
-  <artifactId>firsttestjava</artifactId>
+  <artifactId>rhc-common</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20150824.091336</timestamp>
+      <timestamp>20150916.063336</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20150824091336</lastUpdated>
+    <lastUpdated>20150916063336</lastUpdated>
   </versioning>
 </metadata>

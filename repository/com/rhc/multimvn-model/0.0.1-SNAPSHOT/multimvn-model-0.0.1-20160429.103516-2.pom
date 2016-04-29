@@ -1,0 +1,159 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.rhc</groupId>
+    <artifactId>multimvn</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>multimvn-model</artifactId>
+  <packaging>jar</packaging>
+  
+  <!-- 依赖包仓库地址 -->
+  <repositories>
+      <repository>
+          <id>rhcrepo1</id>
+          <!-- github仓库 -->
+          <url>https://raw.githubusercontent.com/anmei/master/libs/repository</url>
+          <!-- 本地仓库 -->
+          <!-- <url>file: D:\project\mime\libs\repository</url> -->
+          <snapshots>
+              <enabled>true</enabled>
+          </snapshots>
+          <releases>
+              <enabled>true</enabled>
+          </releases>
+      </repository>
+      <repository>
+          <id>rhcrepo2</id>
+          <url>http://repos.beibei.com/nexus/content/groups/public/</url>
+          <snapshots>
+              <enabled>true</enabled>
+          </snapshots>
+          <releases>
+              <enabled>true</enabled>
+          </releases>
+      </repository>
+  </repositories>
+  
+   <!-- 发布包地址 ,对应setting.xml配置文件的中的server节点，server节点中配置发布地址的用户名密码等-->
+   <!-- 本配置只能控制deploy目录，install目录仍然是setting中设置的localRepository地址 ，每一次deploy之前都会自动运行install-->
+   <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>local snapshots</name>
+            <!-- <url>http://repos.beibei.com/nexus/content/repositories/snapshots/</url> -->
+            <!-- <url>file:/home/hengyunabc/code/maven-repo/repository/</url> -->
+            <url>file: D:\project\mime\libs\repository</url>
+            <!-- <url>https://raw.github.com/anmei/master/libs/repository</url> -->
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <name>local releases</name>
+            <!-- <url>http://repos.beibei.com/nexus/content/repositories/releases/</url> -->
+            <url>file: D:\project\mime\libs\repository</url>
+            <!-- <url>https://raw.github.com/anmei/master/libs/repository</url> -->
+        </repository>
+    </distributionManagement>
+    
+    
+    <!-- profile的配置参见：http://www.cnblogs.com/yjmyzz/p/3941043.html -->
+  
+  
+  <dependencies>
+  		<dependency>
+  			<groupId>org.rhc</groupId>
+			<artifactId>mvnjartest</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  		<dependency>
+		  <groupId>commons-lang</groupId>
+		  <artifactId>commons-lang</artifactId>
+		  <version>2.6</version>
+		</dependency>
+  		<dependency>
+		     <groupId>junit</groupId>
+		     <artifactId>junit</artifactId>
+		     <version>4.12</version>
+		     <scope>test</scope>
+		</dependency>
+  			
+        <!-- <dependency>
+            <groupId>com.alibaba.citrus</groupId>
+            <artifactId>citrus-webx-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-sqlmap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.citrus</groupId>
+            <artifactId>citrus-test-all</artifactId>
+        </dependency> -->
+    </dependencies>
+    
+    
+    
+    <build>
+	  	<plugins>
+	  		<!-- 控制是否deploy该项目 -->
+	  		<plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <!-- <inherited>false</inherited> -->
+                <configuration>
+                    <!-- 表示可以发布该项目 -->
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+	  		<plugin>
+	  			<groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-eclipse-plugin</artifactId>
+			    <version>2.9</version>
+	  		</plugin>
+	  		<plugin>  
+		        <groupId>org.apache.maven.plugins</groupId>  
+		        <artifactId>maven-surefire-plugin</artifactId>  
+		        <version>2.9</version>
+		        <configuration>  
+		        <excludes>  
+		            <exclude>**/AppTest.java</exclude>  
+		         </excludes>
+		        </configuration>  
+		        <dependencies>  
+			      	<dependency>  
+				        <groupId>org.apache.maven.surefire</groupId>  
+				       	<artifactId>surefire-junit47</artifactId>
+				        <version>2.9</version>  
+			      </dependency>  
+			    </dependencies>  
+	    	</plugin>
+	  	
+		    <!-- 打包的同时打包source源文件 -->
+		   	<plugin>
+		        <artifactId>maven-source-plugin</artifactId>
+		        <version>2.2.1</version>
+		        <executions>
+		            <execution>
+		                <id>attach-sources</id>
+		                <goals>
+		                    <goal>jar</goal>
+		                </goals>
+		            </execution>
+		        </executions>
+		    </plugin>
+	    </plugins>
+    </build>   
+         
+         
+</project>
